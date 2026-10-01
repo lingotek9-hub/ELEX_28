@@ -3,9 +3,9 @@ import { User } from 'firebase/auth';
 import {
   TableProperties,
   LogOut,
-  Zap,
   ShieldCheck,
   Lock,
+  Eye,
 } from 'lucide-react';
 import { GoogleSheetConfig } from '../types/nomination';
 import { ElexLogo } from './ElexLogo';
@@ -70,19 +70,19 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       {/* Discreet Admin Top Bar (Only visible when Admin is logged in) */}
       {user && (
-        <div className="bg-slate-950 text-white px-3 sm:px-6 py-2 border-b border-emerald-500/30 text-xs font-semibold flex items-center justify-between sticky top-0 z-50 overflow-x-auto">
+        <div className="bg-[#070a10] text-white px-3 sm:px-6 py-2 border-b border-[#f38035]/30 text-xs font-semibold flex items-center justify-between sticky top-0 z-50 overflow-x-auto">
           <div className="flex items-center gap-2 shrink-0">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="font-bold text-emerald-400">لوحة المشرف:</span>
+            <span className="w-2 h-2 rounded-full bg-[#f38035] animate-pulse"></span>
+            <span className="font-bold text-[#f38035]">مشرف ELEX28:</span>
             <span className="text-slate-300 text-[11px] hidden sm:inline">{user.email}</span>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => onChangeMode(activeMode === 'admin' ? 'public' : 'admin')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 activeMode === 'admin'
-                  ? 'bg-emerald-600 text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-[#f38035] to-[#ea580c] text-slate-950 shadow-xs'
                   : 'bg-slate-800 text-slate-300 hover:text-white'
               }`}
             >
@@ -94,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({
                 href={sheetConfig.spreadsheetUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-900 transition-colors text-[11px]"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#67B8DE]/15 text-[#67B8DE] border border-[#67B8DE]/30 hover:bg-[#67B8DE]/25 transition-colors text-[11px]"
               >
                 <TableProperties className="w-3 h-3" />
                 <span className="hidden sm:inline">Sheets</span>
@@ -112,8 +112,8 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       )}
 
-      {/* Main High-Tech ELEX28 Header - Ultra Responsive for all Phones */}
-      <header className="bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/80 text-white sticky top-0 z-40 shadow-xl shadow-slate-950/40">
+      {/* Main High-Tech ELEX28 Header - Ultra Responsive for all Phones & Laptops */}
+      <header className="bg-[#070a10]/95 backdrop-blur-xl border-b border-slate-800/80 text-white sticky top-0 z-40 shadow-xl shadow-black/40">
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* ELEX28 Logo with Secret Admin Trigger */}
@@ -128,19 +128,29 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Header Right: Hidden trigger or admin status */}
             <div className="flex items-center gap-2 shrink-0">
               {user ? (
-                <div className="flex items-center gap-1.5 bg-slate-900 px-2.5 py-1 rounded-xl border border-emerald-500/30 text-xs">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="font-bold text-emerald-300 text-[11px] sm:text-xs">مشرف</span>
+                <div className="flex items-center gap-1.5 bg-[#0c121e] px-2.5 py-1 rounded-xl border border-[#f38035]/30 text-xs">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#f38035]" />
+                  <span className="font-bold text-[#f38035] text-[11px] sm:text-xs">مشرف معتمد</span>
                 </div>
+              ) : activeMode === 'admin' ? (
+                /* Button to return to public if on admin login screen */
+                <button
+                  type="button"
+                  onClick={() => onChangeMode('public')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0c121e] hover:bg-[#131c2c] text-[#f38035] border border-[#f38035]/30 text-xs font-bold transition-all cursor-pointer shadow-sm"
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>صفحة الدفعة</span>
+                </button>
               ) : (
                 /* Discreet trigger (invisible to regular students) */
                 <button
                   onClick={onOpenAdminLogin}
-                  className="opacity-10 hover:opacity-100 p-2 text-slate-400 hover:text-emerald-400 rounded-lg transition-opacity cursor-pointer"
+                  className="opacity-15 hover:opacity-100 p-2 text-slate-400 hover:text-[#f38035] rounded-lg transition-all cursor-pointer"
                   title="المشرف (Ctrl+Shift+A)"
                   aria-label="Admin Access"
                 >
-                  <Lock className="w-3.5 h-3.5" />
+                  <Lock className="w-4 h-4" />
                 </button>
               )}
             </div>

@@ -371,3 +371,11 @@ export async function appendSubmissionsToSheet(
 
   return newSubmissions.length;
 }
+
+export async function appendNominationRow(
+  accessToken: string,
+  spreadsheetId: string,
+  submission: NominationSubmission
+): Promise<number> {
+  return appendSubmissionsToSheet(accessToken, spreadsheetId, [submission]);
+}
