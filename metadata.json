@@ -1,0 +1,6 @@
+{
+  "name": "استمارة ترشيحات أمانات الدفعة",
+  "description": "نظام احترافي لإنشاء وإدارة استمارة الترشح والترشيح لأمانات الدفعة ومزامنة الردود مع Google Sheets",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
